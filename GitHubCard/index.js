@@ -83,7 +83,7 @@ function cardCreator(data){
   profile.textContent = "Profile: ";
   const profileLink = document.createElement('a');
   profileLink.textContent = "Link to profile";
-  profileLink.href = data.url;
+  profileLink.href = data.html_url;
 
   const followers = document.createElement('p');
   followers.textContent = (`Followers: ${data.followers}`);
