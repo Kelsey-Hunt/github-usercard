@@ -7,7 +7,7 @@ import axios from 'axios';
 
 axios.get("https://api.github.com/users/Kelsey-Hunt")
   .then(resp => {
-    console.log(resp);
+    document.querySelector('.cards').appendChild(cardCreator(resp.data));
   })
   .catch(err => console.error(err))
 
@@ -56,6 +56,60 @@ const followersArray = [];
       </div>
     </div>
 */
+
+function cardCreator(data){
+  const card = document.createElement('div');
+  card.classList.add('card');
+
+  const img = document.createElement('img');
+  img.src = data.avatar_url;
+  img.alt = "github user";
+
+  const cardInfo = document.createElement('div');
+  cardInfo.classList.add('card-info');
+
+  const name = document.createElement('h3');
+  name.classList.add('name');
+  name.textContent = data.name;
+
+  const username = document.createElement('p');
+  username.classList.add('username');
+  username.textContent = data.login;
+
+  const location = document.createElement('p');
+  location.textContent = (`Location: ${data.location} `);
+
+  const profile = document.createElement('p');
+  profile.textContent = "Profile: ";
+  const profileLink = document.createElement('a');
+  profileLink.textContent = "Link to profile";
+  profileLink.href = data.url;
+
+  const followers = document.createElement('p');
+  followers.textContent = (`Followers: ${data.followers}`);
+
+  const following = document.createElement('p');
+  following.textContent = (`Following: ${data.following}`);
+
+  const bio = document.createElement('p');
+  bio.textContent = (`Bio: ${data.bio}`);
+
+  card.appendChild(img);
+  card.appendChild(cardInfo);
+
+  cardInfo.appendChild(name);
+  cardInfo.appendChild(username);
+  cardInfo.appendChild(location);
+  cardInfo.appendChild(profile);
+  profile.appendChild(profileLink);
+  cardInfo.appendChild(followers);
+  cardInfo.appendChild(following);
+  cardInfo.appendChild(bio);
+
+  return card;
+}
+
+console.log(cardCreator())
 
 /*
   List of LS Instructors Github username's:
